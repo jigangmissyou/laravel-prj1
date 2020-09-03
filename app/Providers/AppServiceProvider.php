@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Validator::extend('phone', function ($attribute, $value, $parameters, $validator) {
+            // 返回true/false
+            $reg1 = '/^\+86-1[3-9]\d{9}$/';
+            $reg2 = '/^1[3-9]\d{9}$/';
+            return preg_match($reg1,$value) || preg_match($reg2,$value);
+        });
     }
 
     /**

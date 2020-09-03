@@ -6,10 +6,20 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
     Route::get('login', 'LoginController@index')->name('admin.login');
     Route::post('login','LoginController@login')->name('admin.login');
 
-//    Route::group(['middleware'=>['ckAdmin']], function(){
-        Route::get('index','IndexController@index')->name('admin.index');
-        Route::get('welcome','IndexController@welcome')->name('admin.welcome');
-//    });
+    Route::group(['middleware'=>['ckAdmin'], 'as'=>'admin.'], function(){
+        Route::get('index','IndexController@index')->name('index');
+        Route::get('welcome','IndexController@welcome')->name('welcome');
+        Route::get('logout','IndexController@logout')->name('logout');
+        Route::get('user/index','UserController@index')->name('user.index');
+        Route::get('user/add','UserController@create')->name('user.create');
+        Route::post('user/store','UserController@store')->name('user.store');
+        Route::get('user/edit/{id}','UserController@edit')->name('user.edit');
+        Route::post('user/save/{id}','UserController@save')->name('user.save');
+        Route::delete('user/del/{id}','UserController@del')->name('user.del');
+        Route::delete('user/delAll}','UserController@delAll')->name('user.delAll');
+        Route::get('user/appoint', 'NoticeController@demo')->name('notice.demo');
+
+    });
 
 
 

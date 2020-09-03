@@ -41,11 +41,11 @@
                 <ul class="cl">
                     <li>超级管理员</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <a href="#" class="dropDown_A">{{ auth()->user()->username }} <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
                             <li><a href="#">切换账户</a></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="{{route('admin.logout')}}">退出</a></li>
                         </ul>
                     </li>
                     <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
@@ -105,7 +105,7 @@
             <dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="member-list.html" data-title="会员列表" href="javascript:;">会员列表</a></li>
+                    <li><a data-href="{{ route('admin.user.index') }}" data-title="会员列表"  href="javascript:">会员列表</a></li>
                     <li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
                     <li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
                     <li><a data-href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
