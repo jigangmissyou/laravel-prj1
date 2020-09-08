@@ -19,6 +19,8 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', '20')->comment('角色名称');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

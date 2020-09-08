@@ -37,7 +37,8 @@
             <tr class="text-c">
                 <th width="40"><input name="" type="checkbox" value=""></th>
                 <th width="20">ID</th>
-                <th width="100">正式名称</th>
+                <th width="100">真实名字</th>
+                <th width="20">角色</th>
                 <th width="80">用户名</th>
                 <th width="20">性别</th>
                 <th width="150">手机</th>
@@ -52,20 +53,23 @@
                 <td><input name="id[]" type="checkbox" value="{{$item->id}}"></td>
                 <td>{{$item->id}}</td>
                 <td>{{$item->truename}}</td>
+                <td>{{$item->role->name}}</td>
                 <td>{{$item->username}}</td>
                 <td>{{$item->sex}}</td>
                 <td class="text-c">{{$item->phone}}</td>
                 <td>{{$item->email}}</td>
                 <td>{{$item->created_at}}</td>
                 <td class="td-manage">
-                    @if(auth()->user()->deleted_at > 0 )
+                {!! $item->assignRightBtn('admin.user.role') !!}
+{{--                    <a href="{{ route('admin.user.role',$item) }}" class="label label-secondary radius">分配权限</a>--}}
+                @if(auth()->user()->deleted_at > 0 )
                         <a style="text-decoration:none" onClick="userRestore()" href="javascript:;" title="恢复"><i class="Hui-iconfont">&#xe6de;</i></a>
                     @else
                         <a style="text-decoration:none" class="ml-5 delUser" href="{{route('admin.user.del',['id'=>$item->id])}}" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     @endif
                     <a style="text-decoration:none" onClick="userEdit()" href="{{route('admin.user.edit',['id'=>$item->id])}}" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>
             </tr>
-                 @endforeach>
+                 @endforeach
             </tbody>
         </table>
         {{$data->links()}}

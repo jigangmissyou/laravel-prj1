@@ -18,6 +18,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'], function(){
         Route::delete('user/del/{id}','UserController@del')->name('user.del');
         Route::delete('user/delAll}','UserController@delAll')->name('user.delAll');
         Route::get('user/appoint', 'NoticeController@demo')->name('notice.demo');
+        Route::resource('role', 'RoleController');
+        Route::resource('node', 'NodeController');
+        Route::get('role/node/{role}','RoleController@node')->name('role.node');
+        Route::post('role/node/{role}','RoleController@nodeSave')->name('role.node');
+        // 给用户分配角色
+        Route::match(['get', 'post'], 'user/role/{user}', 'UserController@role')->name('user.role');
+
 
     });
 

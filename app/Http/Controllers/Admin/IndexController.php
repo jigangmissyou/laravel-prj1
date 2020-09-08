@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Node;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     function index(){
-        return view('admin.index.index');
+        $auth = session('admin.auth');
+        $model  = new Node();
+        $menuData = $model->treeData($auth);
+        return view('admin.index.index', compact('menuData'));
     }
 
     function welcome(){

@@ -18,6 +18,15 @@ class LoginController extends Controller
         $post = $request->only(['username', 'password']);
         $result = Auth::attempt(['username' => $post['username'], 'password' => $post['password']]);
         if($result){
+            if($post['username'] != config('rbac.super')){
+                $userModel = auth()->user();
+                $roleModel = $userModel->role;
+                $nodeArr = $roleModel->nodes()->pluck('route_name','id')->toArray();
+//                dd($nodeArr);
+                session(['admin.auth' => $nodeArr]);
+            } else {
+                session(['admin.auth' => true]);
+            }
             return redirect(route('admin.index'));
         }
         //将验证失败的信息写到errors里面
